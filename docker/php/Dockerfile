@@ -2,7 +2,7 @@ FROM php:7.3-fpm
 
 # 1000を適宜変更し、hostのuidにguestのuidを合わせる
 # ホスト側でidコマンドを打って調べたuidの値にする
-ARG DOCKER_UID=1000
+ARG DOCKER_UID=501
 ARG DOCKER_USER=docker
 ARG DOCKER_PASSWORD=docker
 
@@ -19,7 +19,7 @@ RUN apt-get update \
   && apt-get install -y vim \
   && apt-get install -y nodejs \
   && apt-get install -y libicu-dev \
-  && docker-php-ext-install pdo_mysql intl mbstring
+  && docker-php-ext-install pdo_mysql intl mbstring exif
 
 # ユーザ作成
 RUN useradd -m --uid ${DOCKER_UID} --groups sudo ${DOCKER_USER} \
