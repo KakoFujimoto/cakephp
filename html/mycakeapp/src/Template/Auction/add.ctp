@@ -9,7 +9,7 @@
 	echo $this->Form->hidden('finished', ['value' => 0]);
 	echo $this->Form->control('endtime');
 	// textarea追加部分
-	echo $this->Form->control('detail', array('cols' => 20, 'rows' => 5, 'value' => '商品の詳細説明を入れてください'));
+	echo $this->Form->control('detail', array('cols' => 20, 'rows' => 5, 'placeholder' => '商品の詳細説明を入れてください'));
 	//画像追加
 	echo $this->Form->control('image_path', array(
 		'label' => false,
