@@ -86,26 +86,34 @@ class AuctionController extends AuctionBaseController
 		if ($this->request->is('post')) {
 			$tmp_data = $this->request->getData();
 
-			//本当に画像なのか？判断
-			if (exif_imagetype($tmp_data['image_path']['tmp_name'])) {
+			// 本当に画像なのかを判断(gif,jpeg,png形式のみ許可)
+			$image_check = exif_imagetype($tmp_data['image_path']['tmp_name']);
+			if ($image_check === 1 || 2 || 3) {
 				//アップロードされた画像名に日時とユーザーidを加える（画像名重複防止）
 				$file_name =   date("YmdHis") .  $tmp_data['user_id'] . $tmp_data['image_path']['name'];
 				//画像保存先パス
 				$img_save_path = WWW_ROOT . 'img/' . $file_name;
-				//イメージの保存処理
+				//画像の保存処理
 				move_uploaded_file($tmp_data['image_path']['tmp_name'], $img_save_path);
 				$tmp_data['image_path'] = $file_name;
+			} else {
+				$this->Flash->error(__('画像をアップロードして下さい'));
 			}
-			// postの内容を全て取得し、$biditemに入れる
-			$biditem = $this->Biditems->patchEntity($biditem, $tmp_data);
-			if ($this->Biditems->save($biditem)) {
-				// 成功時のメッセージ
-				$this->Flash->success(__('保存しました。'));
-
-				return $this->redirect(['action' => 'index']);
+			if ($tmp_data['image_path'] = $file_name) {
+				// postの内容を全て取得し、$biditemに入れる
+				$biditem = $this->Biditems->patchEntity($biditem, $tmp_data);
+				if ($this->Biditems->save($biditem)) {
+					// 成功時のメッセージ
+					$this->Flash->success(__('保存しました。'));
+					return $this->redirect(['action' => 'index']);
+				} else {
+					// 画像以外のデータ保存失敗時のメッセージ
+					$this->Flash->error(__('データの保存に失敗しました。もう一度入力下さい。'));
+				}
+			} else {
+				// 画像保存失敗時のメッセージ
+				$this->Flash->error(__('画像の保存に失敗しました。もう一度入力下さい。'));
 			}
-			// 失敗時のメッセージ
-			$this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
 		}
 		// 値を保管
 		$this->set(compact('biditem'));
