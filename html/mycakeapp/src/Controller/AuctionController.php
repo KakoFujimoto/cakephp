@@ -99,7 +99,7 @@ class AuctionController extends AuctionBaseController
 			} else {
 				$this->Flash->error(__('画像をアップロードして下さい'));
 			}
-			if ($tmp_data['image_path'] = $file_name) {
+			if ($tmp_data['image_path'] === $file_name) {
 				// postの内容を全て取得し、$biditemに入れる
 				$biditem = $this->Biditems->patchEntity($biditem, $tmp_data);
 				if ($this->Biditems->save($biditem)) {
