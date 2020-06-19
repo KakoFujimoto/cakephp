@@ -95,7 +95,7 @@
 echo $this->Html->scriptStart(array('inline' => false));
 echo
 	<<<END
-function countdownTimer(){ 
+function countdownTimer() {
     //現在日時を取得
     var nowTime = new Date();
     //オークション終了日時を取得
@@ -117,8 +117,8 @@ function countdownTimer(){
         var limitTime = days + "日" + hours + "時間" + minutes + "分" + seconds + "秒";
         document.getElementById("timer").innerHTML = limitTime;
         //1秒ごとに処理を繰り返す仕組み
-        setTimeout(countdownTimer,1000);
-        } else {
+        setTimeout(countdownTimer, 1000);
+    } else {
         document.getElementById("timer").innerHTML = "終了済み";
     }
 }
