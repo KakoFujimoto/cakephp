@@ -1,2 +1,4 @@
 docker/mysql/data
 phpmyadmin
+!/webroot/img/cake-logo.png,cake.icon.png,cake.logo.svg,cake.power.gif
+/webroot/img/*
