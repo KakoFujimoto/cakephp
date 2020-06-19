@@ -90,7 +90,7 @@ class AuctionController extends AuctionBaseController
 			$image_check = exif_imagetype($tmp_data['image_path']['tmp_name']);
 			if ($image_check === 1 || $image_check === 2 || $image_check === 3) {
 				//アップロードされた画像名に日時とユーザーidを加える（画像名重複防止）
-				$file_name =   date("YmdHis") .  $tmp_data['user_id'] . $tmp_data['image_path']['name'];
+				$file_name =   'upload_image/' . date("YmdHis") .  $tmp_data['user_id'] . $tmp_data['image_path']['name'];
 				//画像保存先パス
 				$img_save_path = WWW_ROOT . 'img/' . $file_name;
 				//画像の保存処理
