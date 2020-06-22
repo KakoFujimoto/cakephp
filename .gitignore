@@ -1,2 +1,3 @@
 docker/mysql/data
 phpmyadmin
+/webroot/img/upload_image/*
