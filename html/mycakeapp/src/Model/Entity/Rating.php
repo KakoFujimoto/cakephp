@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -35,7 +36,6 @@ class Rating extends Entity
         'comments' => true,
         'bidinfo_id' => true,
         'user' => true,
-        'rated_user' => true,
         'bidinfo' => true,
     ];
 }
