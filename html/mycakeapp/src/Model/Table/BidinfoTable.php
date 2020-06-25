@@ -81,21 +81,15 @@ class BidinfoTable extends Table
 
         $validator
             ->scalar('address')
-            ->maxLength('address', 255)
-            ->requirePresence('address', 'create')
-            ->notEmptyString('address');
+            ->maxLength('address', 255);
 
         $validator
             ->scalar('name')
-            ->maxLength('name', 100)
-            ->requirePresence('name', 'create')
-            ->notEmptyString('name');
+            ->maxLength('name', 100);
 
         $validator
             ->scalar('tel')
-            ->maxLength('tel', 11)
-            ->requirePresence('tel', 'create')
-            ->notEmptyString('tel');
+            ->maxLength('tel', 11);
 
         return $validator;
     }
