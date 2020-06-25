@@ -17,7 +17,7 @@ class AddAddressToBidinfo extends AbstractMigration
         $table->addColumn('address', 'string', [
             'default' => null,
             'limit' => 255,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('name', 'string', [
             'default' => null,
