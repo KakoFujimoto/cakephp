@@ -1,4 +1,5 @@
 <?php
+
 use Migrations\AbstractMigration;
 
 class CreateRatings extends AbstractMigration
@@ -33,7 +34,7 @@ class CreateRatings extends AbstractMigration
             'limit' => 1000,
             'null' => false,
         ]);
-        $table->addColumn('bidinfo_id', 'int', [
+        $table->addColumn('bidinfo_id', 'integer', [
             'default' => null,
             'limit' => 11,
             'null' => false,
