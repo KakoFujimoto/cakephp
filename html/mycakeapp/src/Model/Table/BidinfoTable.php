@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -51,6 +52,12 @@ class BidinfoTable extends Table
             'joinType' => 'INNER',
         ]);
         $this->hasMany('Bidmessages', [
+            'foreignKey' => 'bidinfo_id',
+        ]);
+        $this->hasMany('Messages', [
+            'foreignKey' => 'bidinfo_id',
+        ]);
+        $this->hasMany('Ratings', [
             'foreignKey' => 'bidinfo_id',
         ]);
     }
