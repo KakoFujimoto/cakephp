@@ -27,7 +27,7 @@
 		<div class="top-bar-section">
 			<ul class="right">
 				<!-- ログアウトリンクを追加 -->
-				<li><a href="../users/logout">[ログアウト]</a></li>
+				<li><?= $this->Html->link(__('[ログアウト]'), ['action' => 'logout']) ?></li>
 			</ul>
 		</div>
 	</nav>
