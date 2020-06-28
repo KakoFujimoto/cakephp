@@ -89,6 +89,7 @@
 	<?php else : ?>
 		<p><?= '※入札は、終了しました。' ?></p>
 	<?php endif; ?>
+	<h6><a href="<?= $this->Url->build(['action' => 'home3', $biditem->id]) ?>">[発送先入力]</a></h6>
 </div>
 <!-- カウントダウンタイマー -->
 <?php
