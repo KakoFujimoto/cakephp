@@ -20,6 +20,10 @@ class AuctionController extends AuctionBaseController
 		$this->loadModel('Bidrequests');
 		$this->loadModel('Bidinfo');
 		$this->loadModel('Bidmessages');
+		$this->loadModel('Messages');
+		$this->loadModel('Ratings');
+
+
 		// ログインしているユーザー情報をauthuserに設定
 		$this->set('authuser', $this->Auth->user());
 		// レイアウトをauctionに変更
@@ -74,8 +78,13 @@ class AuctionController extends AuctionBaseController
 			'contain' => ['Users'],
 			'order' => ['price' => 'desc']
 		])->toArray();
+		// biditem_idが$idの$bidinfoをview.ctpに渡す処理　//added
+		$bidinfo = $this->Bidinfo->find('all', [
+			'conditions' => ['biditem_id' => $id],
+			'contain' => ['Biditems', 'Users']
+		]);
 		// オブジェクト類をテンプレート用に設定
-		$this->set(compact('biditem', 'bidrequests'));
+		$this->set(compact('biditem', 'bidrequests', 'bidinfo'));
 	}
 	// 出品する処理
 	public function add()
@@ -118,8 +127,6 @@ class AuctionController extends AuctionBaseController
 		// 値を保管
 		$this->set(compact('biditem'));
 	}
-
-
 
 	// 入札の処理
 	public function bid($biditem_id = null)
@@ -199,5 +206,32 @@ class AuctionController extends AuctionBaseController
 			'limit' => 10
 		])->toArray();
 		$this->set(compact('biditems'));
+	}
+
+	// 落札者の発送先入力画面の表示
+	public function home3($id = null)
+	{
+		// biditem_idが$idの$bidinfoをview.ctpに渡す処理　//added
+		$bidinfo = $this->Bidinfo->find('all', [
+			'conditions' => ['biditem_id' => $id],
+			'contain' => ['Biditems', 'Users', 'Biditems.Users']
+		])->first();
+		$bidinfo->biditem_id = $id;
+		$biditem_id = $bidinfo->biditem->id;
+		$user_id = $bidinfo->user->id;
+		$price = $bidinfo->price;
+		// saveの処理
+		if ($this->request->is('post')) {
+			$bidinfo = $this->Bidinfo->newEntity();
+			$data = $this->request->getData();
+			$bidinfo = $this->Bidinfo->patchEntity($bidinfo, $data);
+			if ($this->Bidinfo->save($bidinfo)) {
+				$this->Flash->success(__('送信しました！'));
+				return $this->redirect(['action' => 'index']);
+			} else {
+				$this->Flash->error(__('送信に失敗しました。もう一度入力ください'));
+			}
+		}
+		$this->set(compact('bidinfo', 'biditem_id', 'user_id', 'price'));
 	}
 }
