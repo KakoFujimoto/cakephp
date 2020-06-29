@@ -227,11 +227,10 @@ class AuctionController extends AuctionBaseController
 			$bidinfo = $this->Bidinfo->patchEntity($bidinfo, $data);
 			if ($this->Bidinfo->save($bidinfo)) {
 				$this->Flash->success(__('送信しました！'));
-				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->error(__('送信に失敗しました。もう一度入力ください'));
 			}
 		}
-		$this->set(compact('bidinfo', 'biditem_id', 'user_id', 'price'));
+		$this->set(compact('bidinfo'));
 	}
 }
