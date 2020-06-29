@@ -85,7 +85,12 @@ class AuctionController extends AuctionBaseController
 		]);
 		// オブジェクト類をテンプレート用に設定
 		$this->set(compact('biditem', 'bidrequests', 'bidinfo'));
+
+		// ここで発送先情報の出力  //added
+
 	}
+
+
 	// 出品する処理
 	public function add()
 	{
@@ -217,9 +222,6 @@ class AuctionController extends AuctionBaseController
 			'contain' => ['Biditems', 'Users', 'Biditems.Users']
 		])->first();
 		$bidinfo->biditem_id = $id;
-		$biditem_id = $bidinfo->biditem->id;
-		$user_id = $bidinfo->user->id;
-		$price = $bidinfo->price;
 		// saveの処理
 		if ($this->request->is('post')) {
 			$bidinfo = $this->Bidinfo->newEntity();
