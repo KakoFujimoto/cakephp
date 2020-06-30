@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Message $message
@@ -17,9 +18,9 @@
     <fieldset>
         <legend><?= __('Add Message') ?></legend>
         <?php
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('message');
-            echo $this->Form->control('bidinfo_id');
+        echo $this->Form->hidden('user_id', ['value' => $authuser['id']]);
+        echo $this->Form->control('message');
+        echo $this->Form->hidden('bidinfo_id', ['value' => $bidinfo->id]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
