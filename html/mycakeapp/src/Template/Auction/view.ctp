@@ -92,7 +92,7 @@
 	<?php if (isset($bidinfo) && $authuser['id'] === $bidinfo->user_id && is_null($bidinfo->address)) : ?>
 		<h6><a href="<?= $this->Url->build(['action' => 'home3', $biditem->id]) ?>">[発送先入力]</a></h6>
 	<?php endif; ?>
-	<?php if (isset($bidinfo->address)) : ?>
+	<?php if (isset($bidinfo->address) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditem->user_id)) : ?>
 		<div class="related">
 			<h4><?= __('発送先情報') ?></h4>
 			<table cellpadding="0" cellspacing="0">
