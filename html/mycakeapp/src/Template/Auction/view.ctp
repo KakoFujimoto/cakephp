@@ -90,10 +90,25 @@
 		<p><?= '※入札は、終了しました。' ?></p>
 	<?php endif; ?>
 	<h6><a href="<?= $this->Url->build(['action' => 'home3', $biditem->id]) ?>">[発送先入力]</a></h6>
-	<p><?= h($bidinfo->address) ?></p>
-	<p><?= h($bidinfo->name) ?></p>
-	<p><?= h($bidinfo->tel) ?></p>
-
+	<div class="related">
+		<h4><?= __('発送先情報') ?></h4>
+		<?php if (!empty($bidinfo->address)) : ?>
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<th scope="col">住所</th>
+					<th scope="col">名前</th>
+					<th scope="col">電話番号</th>
+				</tr>
+				<tr>
+					<td><?= h($bidinfo->address) ?></td>
+					<td><?= h($bidinfo->name) ?></td>
+					<td><?= h($bidinfo->tel) ?></td>
+				</tr>
+			</table>
+		<?php else : ?>
+			<p></p>
+		<?php endif; ?>
+	</div>
 	<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[取引相手にメッセージを送る]</a></h6>
 </div>
 <!-- カウントダウンタイマー -->
