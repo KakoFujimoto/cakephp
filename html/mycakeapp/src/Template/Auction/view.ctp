@@ -90,9 +90,9 @@
 		<p><?= '※入札は、終了しました。' ?></p>
 	<?php endif; ?>
 	<h6><a href="<?= $this->Url->build(['action' => 'home3', $biditem->id]) ?>">[発送先入力]</a></h6>
-	<div class="related">
-		<h4><?= __('発送先情報') ?></h4>
-		<?php if (!empty($bidinfo->address)) : ?>
+	<?php if (!empty($bidinfo->address)) : ?>
+		<div class="related">
+			<h4><?= __('発送先情報') ?></h4>
 			<table cellpadding="0" cellspacing="0">
 				<tr>
 					<th scope="col">住所</th>
@@ -105,10 +105,8 @@
 					<td><?= h($bidinfo->tel) ?></td>
 				</tr>
 			</table>
-		<?php else : ?>
-			<p></p>
-		<?php endif; ?>
-	</div>
+		</div>
+	<?php endif; ?>
 	<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[取引相手にメッセージを送る]</a></h6>
 </div>
 <!-- カウントダウンタイマー -->
