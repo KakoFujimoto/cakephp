@@ -81,13 +81,11 @@ class AuctionController extends AuctionBaseController
 		// biditem_idが$idの$bidinfoをview.ctpに渡す処理　//added
 		$bidinfo = $this->Bidinfo->find('all', [
 			'conditions' => ['biditem_id' => $id],
-			'contain' => ['Biditems', 'Users']
-		]);
+			'contain' => ['Biditems', 'Users', 'Biditems.Users'],
+			'order' => ['Bidinfo.id' => 'desc']
+		])->first();
 		// オブジェクト類をテンプレート用に設定
 		$this->set(compact('biditem', 'bidrequests', 'bidinfo'));
-
-		// ここで発送先情報の出力  //added
-
 	}
 
 
@@ -219,12 +217,12 @@ class AuctionController extends AuctionBaseController
 		// biditem_idが$idの$bidinfoをview.ctpに渡す処理　//added
 		$bidinfo = $this->Bidinfo->find('all', [
 			'conditions' => ['biditem_id' => $id],
-			'contain' => ['Biditems', 'Users', 'Biditems.Users']
+			'contain' => ['Biditems', 'Users', 'Biditems.Users'],
+			'order' => ['Bidinfo.id' => 'desc']
 		])->first();
 		$bidinfo->biditem_id = $id;
 		// saveの処理
 		if ($this->request->is('post')) {
-			$bidinfo = $this->Bidinfo->newEntity();
 			$data = $this->request->getData();
 			$bidinfo = $this->Bidinfo->patchEntity($bidinfo, $data);
 			if ($this->Bidinfo->save($bidinfo)) {
