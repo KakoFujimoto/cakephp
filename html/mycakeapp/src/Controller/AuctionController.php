@@ -212,7 +212,7 @@ class AuctionController extends AuctionBaseController
 	}
 
 	// 落札者の発送先入力画面の表示
-	public function home3($id = null)
+	public function address($id = null)
 	{
 		// biditem_idが$idの$bidinfoをview.ctpに渡す処理　//added
 		$bidinfo = $this->Bidinfo->find('all', [
@@ -228,13 +228,10 @@ class AuctionController extends AuctionBaseController
 			if ($this->Bidinfo->save($bidinfo)) {
 				$this->Flash->success(__('送信しました！'));
 				return $this->redirect(['action' => 'index']);
-				// 二重投稿を防ぐ	
-			} elseif ($this->request->is('post') && isset($bidinfo->address)) {
-				$this->Flash->error(__('既に発送先情報は送信されています'));
 			} else {
 				$this->Flash->error(__('送信に失敗しました。もう一度入力ください'));
 			}
-			$this->set(compact('bidinfo'));
 		}
+		$this->set(compact('bidinfo'));
 	}
 }

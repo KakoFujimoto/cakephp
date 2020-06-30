@@ -90,7 +90,7 @@
 		<p><?= '※入札は、終了しました。' ?></p>
 	<?php endif; ?>
 	<?php if (isset($bidinfo) && $authuser['id'] === $bidinfo->user_id && is_null($bidinfo->address)) : ?>
-		<h6><a href="<?= $this->Url->build(['action' => 'home3', $biditem->id]) ?>">[発送先入力]</a></h6>
+		<h6><a href="<?= $this->Url->build(['action' => 'address', $biditem->id]) ?>">[発送先入力]</a></h6>
 	<?php endif; ?>
 	<?php if (isset($bidinfo->address) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditem->user_id)) : ?>
 		<div class="related">
