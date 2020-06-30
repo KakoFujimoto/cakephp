@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
  * Messages Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\BidinfosTable&\Cake\ORM\Association\BelongsTo $Bidinfos
+ * @property \App\Model\Table\BidinfoTable&\Cake\ORM\Association\BelongsTo $Bidinfo
  *
  * @method \App\Model\Entity\Message get($primaryKey, $options = [])
  * @method \App\Model\Entity\Message newEntity($data = null, array $options = [])

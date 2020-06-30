@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event; // added.
+use Exception; // added.
 
 /**
  * Messages Controller
@@ -10,17 +13,35 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\Message[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class MessagesController extends AppController
+class MessagesController extends AuctionBaseController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null
-     */
+    // デフォルトテーブルを使わない
+    public $useTable = false;
+
+    public function initialize()
+    {
+
+        parent::initialize();
+        $this->loadComponent('Paginator');
+        // 必要なモデルをすべてロード
+        $this->loadModel('Users');
+        $this->loadModel('Biditems');
+        $this->loadModel('Bidrequests');
+        $this->loadModel('Bidinfo');
+        $this->loadModel('Bidmessages');
+        $this->loadModel('Messages');
+        $this->loadModel('Ratings');
+
+
+        // ログインしているユーザー情報をauthuserに設定
+        $this->set('authuser', $this->Auth->user());
+        // レイアウトをauctionに変更
+        $this->viewBuilder()->setLayout('auction');
+    }
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'Bidinfos'],
+            'contain' => ['Users', 'Bidinfo'],
         ];
         $messages = $this->paginate($this->Messages);
 
@@ -37,7 +58,7 @@ class MessagesController extends AppController
     public function view($id = null)
     {
         $message = $this->Messages->get($id, [
-            'contain' => ['Users', 'Bidinfos'],
+            'contain' => ['Users', 'Bidinfo'],
         ]);
 
         $this->set('message', $message);
@@ -48,8 +69,14 @@ class MessagesController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
+        $bidinfo = $this->Bidinfo->get($id, [
+            'contain' => ['Biditems', 'Users']
+        ]);
+        // pr($bidinfo);
+        $this->set(compact('bidinfo'));
+
         $message = $this->Messages->newEntity();
         if ($this->request->is('post')) {
             $message = $this->Messages->patchEntity($message, $this->request->getData());
@@ -61,8 +88,7 @@ class MessagesController extends AppController
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
         $users = $this->Messages->Users->find('list', ['limit' => 200]);
-        $bidinfos = $this->Messages->Bidinfos->find('list', ['limit' => 200]);
-        $this->set(compact('message', 'users', 'bidinfos'));
+        $this->set(compact('message', 'users', 'bidinfo'));
     }
 
     /**
@@ -87,8 +113,8 @@ class MessagesController extends AppController
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
         $users = $this->Messages->Users->find('list', ['limit' => 200]);
-        $bidinfos = $this->Messages->Bidinfos->find('list', ['limit' => 200]);
-        $this->set(compact('message', 'users', 'bidinfos'));
+        $bidinfo = $this->Messages->Bidinfo->find('list', ['limit' => 200]);
+        $this->set(compact('message', 'users', 'bidinfo'));
     }
 
     /**
