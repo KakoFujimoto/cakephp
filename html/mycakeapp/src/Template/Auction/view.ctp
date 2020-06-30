@@ -90,6 +90,10 @@
 		<p><?= '※入札は、終了しました。' ?></p>
 	<?php endif; ?>
 	<h6><a href="<?= $this->Url->build(['action' => 'home3', $biditem->id]) ?>">[発送先入力]</a></h6>
+	<p><?= h($bidinfo->address) ?></p>
+	<p><?= h($bidinfo->name) ?></p>
+	<p><?= h($bidinfo->tel) ?></p>
+
 	<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[取引相手にメッセージを送る]</a></h6>
 </div>
 <!-- カウントダウンタイマー -->
