@@ -87,10 +87,12 @@
 			<p><?= '※入札は、まだありません。' ?></p>
 		<?php endif; ?>
 	<?php else : ?>
-		<p><?= '※入札は、終了しました。' ?></p>
+		<p><?= '※入札は、終了しました。' ?></p>>
 	<?php endif; ?>
-	<h6><a href="<?= $this->Url->build(['action' => 'home3', $biditem->id]) ?>">[発送先入力]</a></h6>
-	<?php if (!empty($bidinfo->address)) : ?>
+	<?php if (isset($bidinfo) && $authuser['id'] === $bidinfo->user_id) : ?>
+		<h6><a href="<?= $this->Url->build(['action' => 'home3', $biditem->id]) ?>">[発送先入力]</a></h6>
+	<?php endif; ?>
+	<?php if (isset($bidinfo->address)) : ?>
 		<div class="related">
 			<h4><?= __('発送先情報') ?></h4>
 			<table cellpadding="0" cellspacing="0">
@@ -107,8 +109,11 @@
 			</table>
 		</div>
 	<?php endif; ?>
-	<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[取引相手にメッセージを送る]</a></h6>
+	<?php if (isset($bidinfo)) : ?>
+		<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[取引相手にメッセージを送る]</a></h6>
+	<?php endif; ?>
 </div>
+
 <!-- カウントダウンタイマー -->
 <?php
 echo $this->Html->scriptStart(array('inline' => false));
