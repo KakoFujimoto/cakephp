@@ -87,7 +87,7 @@
 			<p><?= '※入札は、まだありません。' ?></p>
 		<?php endif; ?>
 	<?php else : ?>
-		<p><?= '※入札は、終了しました。' ?></p>>
+		<p><?= '※入札は、終了しました。' ?></p>
 	<?php endif; ?>
 	<?php if (isset($bidinfo) && $authuser['id'] === $bidinfo->user_id) : ?>
 		<h6><a href="<?= $this->Url->build(['action' => 'home3', $biditem->id]) ?>">[発送先入力]</a></h6>
