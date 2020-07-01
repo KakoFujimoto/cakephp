@@ -116,6 +116,9 @@
 	<?php elseif (isset($bidinfo->address) && $authuser['id'] === $bidinfo->user_id) : ?>
 		<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[出品者へメッセージ送信]</a></h6>
 	<?php endif; ?>
+	<!-- 発送連絡のボタンをここに作る -->
+	<h6><a href="<?= $this->Url->build(['action' => 'sending', $bidinfo->id]) ?>">[発送連絡]</a></h6>
+	<!-- ここにリンクを作る -->
 </div>
 
 <!-- カウントダウンタイマー -->
