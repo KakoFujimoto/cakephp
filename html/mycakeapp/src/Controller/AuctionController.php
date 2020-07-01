@@ -238,23 +238,16 @@ class AuctionController extends AuctionBaseController
 	// 出品者の発送連絡
 	public function sending()
 	{
-		// debug($this->request->getData('bidinfo_id'));
-		// exit();
-		// biditem_idが$idの$bidinfoをview.ctpに渡す処理　//added
-
-		// debug($bidinfo);
-		// exit();
-
-		// saveの処理
+		// ボタンが押されればis_sentをtrueにして保存する
 		if ($this->request->is('post')) {
 			$data = $this->request->getData();
 			$bidinfo = $this->Bidinfo->get($data['bidinfo_id']);
 			$bidinfo->is_sent = true;
 			if ($this->Bidinfo->save($bidinfo)) {
-				$this->Flash->success(__('送信しました！'));
+				$this->Flash->success(__('落札者へ発送連絡をしました！'));
 				return $this->redirect(['action' => 'index']);
 			} else {
-				$this->Flash->error(__('送信に失敗しました。もう一度入力ください'));
+				$this->Flash->error(__('送信できませんでした。もう一度試してください'));
 			}
 		}
 	}
