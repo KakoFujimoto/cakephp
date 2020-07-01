@@ -110,10 +110,10 @@
 		</div>
 	<?php endif; ?>
 	<!-- ログインユーザーが出品者の場合 -->
-	<?php if (isset($bidinfo->address) && $authuser['id'] === $biditem->user_id) : ?>
+	<?php if (isset($bidinfo->id) && $authuser['id'] === $biditem->user_id) : ?>
 		<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[落札者へメッセージ送信]</a></h6>
 		<!-- 落札者の場合 -->
-	<?php elseif (isset($bidinfo->address) && $authuser['id'] === $bidinfo->user_id) : ?>
+	<?php elseif (isset($bidinfo->id) && $authuser['id'] === $bidinfo->user_id) : ?>
 		<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[出品者へメッセージ送信]</a></h6>
 	<?php endif; ?>
 	<!-- 発送連絡のボタン -->
