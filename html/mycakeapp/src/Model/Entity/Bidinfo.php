@@ -39,6 +39,7 @@ class Bidinfo extends Entity
         'address' => true,
         'name' => true,
         'tel' => true,
-        'sending' => true
+        'is_sent' => true,
+        'is_received' => true
     ];
 }

@@ -92,8 +92,12 @@ class BidinfoTable extends Table
             ->maxLength('tel', 11);
 
         $validator
-            ->boolean('sending')
-            ->maxLength('sending', 1);
+            ->boolean('is_sent')
+            ->maxLength('is_sent', 1);
+
+        $validator
+            ->boolean('is_received')
+            ->maxLength('is_received', 1);
 
         return $validator;
     }
