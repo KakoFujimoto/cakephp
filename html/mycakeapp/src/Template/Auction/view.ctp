@@ -117,19 +117,21 @@
 		<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[出品者へメッセージ送信]</a></h6>
 	<?php endif; ?>
 	<!-- 発送連絡のボタン -->
-	<?= $this->Form->create(
-		'Bidinfo',
-		[
-			'type' => 'post',
-			'url' => ['action' => 'sending']
-		]
-	) ?>
-	<?php
-	echo $this->Form->hidden('bidinfo_id', ['value' => $bidinfo->id]);
-	?>
-	<?= $this->Form->button(__('発送連絡をする')) ?>
-	<?= $this->Form->end() ?>
-	<!-- 発送連絡のボタン -->
+	<?php if (isset($bidinfo->address) && $authuser['id'] === $biditem->user_id && is_null($bidinfo->is_sent)) : ?>
+		<?= $this->Form->create(
+			'Bidinfo',
+			[
+				'type' => 'post',
+				'url' => ['action' => 'sending']
+			]
+		) ?>
+		<?php
+		echo $this->Form->hidden('bidinfo_id', ['value' => $bidinfo->id]);
+		?>
+		<?= $this->Form->button(__('発送連絡をする')) ?>
+		<?= $this->Form->end() ?>
+		<!-- 発送連絡のボタン -->
+	<?php endif; ?>
 </div>
 
 <!-- カウントダウンタイマー -->
