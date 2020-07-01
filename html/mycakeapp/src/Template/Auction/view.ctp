@@ -132,6 +132,13 @@
 		<?= $this->Form->end() ?>
 		<!-- 発送連絡のボタン -->
 	<?php endif; ?>
+	<!-- 発送連絡をしたかの表示 -->
+	<?php if (isset($bidinfo->is_sent) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditem->user_id)) : ?>
+		<div class="related">
+			<h4><?= __('商品は発送されました') ?></h4>
+		</div>
+	<?php endif; ?>
+	<!-- ここまで -->
 </div>
 
 <!-- カウントダウンタイマー -->
