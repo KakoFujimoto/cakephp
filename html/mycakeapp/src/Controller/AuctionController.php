@@ -236,19 +236,20 @@ class AuctionController extends AuctionBaseController
 	}
 
 	// 出品者の発送連絡
-	public function sending($id = null)
+	public function sending()
 	{
+		// debug($this->request->getData('bidinfo_id'));
+		// exit();
 		// biditem_idが$idの$bidinfoをview.ctpに渡す処理　//added
-		$bidinfo = $this->Bidinfo->find('all', [
-			'conditions' => ['biditem_id' => $id],
-			'contain' => ['Biditems', 'Users', 'Biditems.Users'],
-			'order' => ['Bidinfo.id' => 'desc']
-		])->first();
-		$bidinfo->biditem_id = $id;
+
+		// debug($bidinfo);
+		// exit();
+
 		// saveの処理
 		if ($this->request->is('post')) {
 			$data = $this->request->getData();
-			$bidinfo = $this->Bidinfo->patchEntity($bidinfo, $data);
+			$bidinfo = $this->Bidinfo->get($data['bidinfo_id']);
+			$bidinfo->is_sent = true;
 			if ($this->Bidinfo->save($bidinfo)) {
 				$this->Flash->success(__('送信しました！'));
 				return $this->redirect(['action' => 'index']);
@@ -256,6 +257,5 @@ class AuctionController extends AuctionBaseController
 				$this->Flash->error(__('送信に失敗しました。もう一度入力ください'));
 			}
 		}
-		$this->set(compact('bidinfo'));
 	}
 }
