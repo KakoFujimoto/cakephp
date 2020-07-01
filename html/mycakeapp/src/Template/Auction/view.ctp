@@ -139,6 +139,22 @@
 		</div>
 	<?php endif; ?>
 	<!-- ここまで -->
+	<!-- 受取連絡のボタン -->
+	<?php if (isset($bidinfo->is_sent) && $authuser['id'] === $bidinfo->user_id && is_null($bidinfo->is_received)) : ?>
+		<?= $this->Form->create(
+			'Bidinfo',
+			[
+				'type' => 'post',
+				'url' => ['action' => 'receiving']
+			]
+		) ?>
+		<?php
+		echo $this->Form->hidden('bidinfo_id', ['value' => $bidinfo->id]);
+		?>
+		<?= $this->Form->button(__('受取連絡をする')) ?>
+		<?= $this->Form->end() ?>
+		<!-- 受取連絡のボタン -->
+	<?php endif; ?>
 </div>
 
 <!-- カウントダウンタイマー -->

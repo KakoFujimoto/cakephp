@@ -251,4 +251,21 @@ class AuctionController extends AuctionBaseController
 			}
 		}
 	}
+
+	// 落札者の受取連絡
+	public function receiving()
+	{
+		// ボタンが押されればis_receivedをtrueにして保存する
+		if ($this->request->is('post')) {
+			$data = $this->request->getData();
+			$bidinfo = $this->Bidinfo->get($data['bidinfo_id']);
+			$bidinfo->is_received = true;
+			if ($this->Bidinfo->save($bidinfo)) {
+				$this->Flash->success(__('出品者へ受取連絡をしました！'));
+				return $this->redirect(['action' => 'index']);
+			} else {
+				$this->Flash->error(__('送信できませんでした。もう一度試してください'));
+			}
+		}
+	}
 }
