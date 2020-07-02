@@ -155,11 +155,11 @@
 		<?= $this->Form->end() ?>
 		<!-- 受取連絡のボタン -->
 	<?php endif; ?>
-	<?php if (isset($bidinfo->is_received) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditem->user_id)) : ?>
+	<?php if (isset($bidinfo->is_received) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditem->user_id && !$ratings->user_id === $authuser['id'])) : ?>
 		<h6><a href="<?= $this->Url->build(['controller' => 'Ratings', 'action' => 'add', $bidinfo->id]) ?>">[取引相手の評価をする]</a></h6>
 	<?php endif; ?>
-</div>
 
+</div>
 <!-- カウントダウンタイマー -->
 <?php
 echo $this->Html->scriptStart(array('inline' => false));
