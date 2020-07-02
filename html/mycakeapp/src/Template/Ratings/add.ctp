@@ -16,7 +16,6 @@
         echo $this->Form->hidden('rated_user_id', ['value' => $biditems->user_id]);
         echo $this->Form->control('stars');
         echo $this->Form->control('comments');
-        var_dump($biditems->user_id);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

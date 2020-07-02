@@ -68,19 +68,17 @@ class RatingsController extends AuctionBaseController
         // biditemsのidがbidinfoのbiditem_idと一致するものをadd.ctpに渡す
         $biditems = $this->Biditems->get($bidinfo->biditem_id);
 
-        //saveの処理
-        // $rating = $this->Ratings->newEntity();
-        // if ($this->request->is('post')) {
-        //     $rating = $this->Ratings->patchEntity($rating, $this->request->getData());
-        //     if ($this->Ratings->save($rating)) {
-        //         $this->Flash->success(__('The rating has been saved.'));
+        // saveの処理
+        $rating = $this->Ratings->newEntity();
+        if ($this->request->is('post')) {
+            $rating = $this->Ratings->patchEntity($rating, $this->request->getData());
+            if ($this->Ratings->save($rating)) {
+                $this->Flash->success(__('評価を送信しました！'));
 
-        //         return $this->redirect(['action' => 'index']);
-        //     }
-        //     $this->Flash->error(__('The rating could not be saved. Please, try again.'));
-        // }
-
-
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('送信できませんでした。もう一度試してください。'));
+        }
         $this->set(compact('bidinfo', 'biditems'));
     }
 
