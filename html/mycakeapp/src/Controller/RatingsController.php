@@ -42,7 +42,7 @@ class RatingsController extends AuctionBaseController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'Bidinfo', 'Biditems'],
+            'contain' => ['Users', 'Bidinfo'],
         ];
         $ratings = $this->paginate($this->Ratings);
 
