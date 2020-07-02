@@ -86,6 +86,15 @@ class AuctionController extends AuctionBaseController
 		])->first();
 		// オブジェクト類をテンプレート用に設定
 		$this->set(compact('biditem', 'bidrequests', 'bidinfo'));
+
+		// ratingsテーブルからbidinfo_idが落札商品であるレコードを取得し渡す
+		$bidinfo_id = $bidinfo->id;
+		$this->set(compact('bidinfo_id'));
+		$ratings = $this->Ratings->find(
+			'all',
+			['conditions' => ['bidinfo_id' => $bidinfo_id]]
+		)->first();
+		$this->set(compact('ratings'));
 	}
 
 
