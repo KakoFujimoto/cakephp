@@ -7,7 +7,7 @@
     </ul>
 </nav> -->
 <div class="ratings form large-9 medium-8 columns content">
-    <?= $this->Form->create($rating) ?>
+    <?= $this->Form->create('Ratings') ?>
     <fieldset>
         <legend><?= __('取引相手を評価する') ?></legend>
         <?php
