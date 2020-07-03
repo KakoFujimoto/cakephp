@@ -16,7 +16,9 @@
         <tbody>
             <?php foreach ($users as $user) : ?>
                 <tr>
-                    <td><?= h($user->username) ?></td>
+                    <td>
+                        <?php echo $this->Html->link($user->username, ['action' => 'view', $user->id]); ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
