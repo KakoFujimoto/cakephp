@@ -6,23 +6,11 @@
  */
 ?>
 <div class="users view large-9 medium-8 columns content">
-    <h3><?= h($user->id) ?></h3>
+    <h3><?= h($user->username) . 'の情報' ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Username') ?></th>
+            <th scope="row"><?= __('名前') ?></th>
             <td><?= h($user->username) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Password') ?></th>
-            <td><?= h($user->password) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Role') ?></th>
-            <td><?= h($user->role) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($user->id) ?></td>
         </tr>
     </table>
     <!-- 今やってるのここ！ -->
@@ -31,13 +19,11 @@
         <?php if (!empty($user->ratings)) : ?>
             <table cellpadding="0" cellspacing="0">
                 <tr>
-                    <th scope="col"><?= __('評価した人') ?></th>
-                    <th scope="col"><?= __('星の数') ?></th>
+                    <th scope="col"><?= __('★の数') ?></th>
                     <th scope="col"><?= __('評価コメント') ?></th>
                 </tr>
                 <?php foreach ($user->ratings as $ratings) : ?>
                     <tr>
-                        <td><?= h($ratings->rated_user_id) ?></td>
                         <td><?= h($ratings->stars) ?></td>
                         <td><?= h($ratings->comments) ?></td>
                     </tr>
