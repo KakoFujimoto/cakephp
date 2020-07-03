@@ -19,7 +19,20 @@
         } elseif ($authuser['id'] === $bidinfo->user_id) {
             echo $this->Form->hidden('rated_user_id', ['value' => $biditems->user_id]);
         }
-        echo $this->Form->control('stars');
+        echo $this->Form->control(
+            'stars',
+            [
+                'type' => 'select',
+                'options' => [
+                    1 => '★１個',
+                    2 => '★２個',
+                    3 => '★３個',
+                    4 => '★４個',
+                    5 => '★５個'
+                ],
+                'empty' => '星の数を選んでください'
+            ]
+        );
         echo $this->Form->control('comments');
         echo $this->Form->hidden('bidinfo_id', ['value' => $bidinfo->id]);
         ?>
