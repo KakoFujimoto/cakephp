@@ -108,7 +108,7 @@ class UsersController extends AuctionBaseController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Bidinfo', 'Biditems', 'Bidmessages', 'Bidrequests', 'Messages', 'Ratings']
+            'contain' => ['Ratings']
         ]);
 
         $this->set('user', $user);
