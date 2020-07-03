@@ -75,7 +75,7 @@ class RatingsController extends AuctionBaseController
             if ($this->Ratings->save($rating)) {
                 $this->Flash->success(__('評価を送信しました！'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Auction', 'action' => 'index']);
             }
             $this->Flash->error(__('送信できませんでした。もう一度試してください。'));
         }
