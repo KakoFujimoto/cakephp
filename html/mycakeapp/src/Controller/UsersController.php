@@ -15,7 +15,7 @@ use Cake\Event\Event; // added.
  *
  * @method \App\Model\Entity\User[] paginate($object = null, array $settings = [])
  */
-class UsersController extends AppController
+class UsersController extends AuctionBaseController
 {
 
     public function initialize()

@@ -81,7 +81,8 @@ class AuctionBaseController extends AppController
 			if (
 				$this->name == 'Auction' ||
 				$this->name == 'Messages' ||
-				$this->name == 'Ratings'
+				$this->name == 'Ratings' ||
+				$this->name == 'Users'
 			) {
 				return true;
 			} else {
