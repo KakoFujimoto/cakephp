@@ -10,7 +10,7 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('username') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('ユーザー名') ?></th>
             </tr>
         </thead>
         <tbody>
