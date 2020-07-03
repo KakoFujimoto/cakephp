@@ -17,33 +17,26 @@ use Cake\Event\Event; // added.
  */
 class UsersController extends AuctionBaseController
 {
-
+    // デフォルトテーブルを使わない
+    public $useTable = false;
     public function initialize()
     {
         parent::initialize();
-        // 各種コンポーネントのロード
-        $this->loadComponent('RequestHandler');
-        $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'],
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'username',
-                        'password' => 'password'
-                    ]
-                ]
-            ],
-            'loginRedirect' => [
-                'controller' => 'Users',
-                'action' => 'login'
-            ],
-            'logoutRedirect' => [
-                'controller' => 'Users',
-                'action' => 'logout',
-            ],
-            'authError' => 'ログインしてください。',
-        ]);
+        $this->loadComponent('Paginator');
+        // 必要なモデルをすべてロード
+        $this->loadModel('Users');
+        $this->loadModel('Biditems');
+        $this->loadModel('Bidrequests');
+        $this->loadModel('Bidinfo');
+        $this->loadModel('Bidmessages');
+        $this->loadModel('Messages');
+        $this->loadModel('Ratings');
+
+
+        // ログインしているユーザー情報をauthuserに設定
+        $this->set('authuser', $this->Auth->user());
+        // レイアウトをauctionに変更
+        $this->viewBuilder()->setLayout('auction');
     }
 
     // ログイン処理
@@ -115,7 +108,7 @@ class UsersController extends AuctionBaseController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Bidinfo', 'Biditems', 'Bidmessages', 'Bidrequests']
+            'contain' => ['Bidinfo', 'Biditems', 'Bidmessages', 'Bidrequests', 'Messages', 'Ratings']
         ]);
 
         $this->set('user', $user);
