@@ -110,54 +110,56 @@
 		</div>
 	<?php endif; ?>
 	<!-- ログインユーザーが出品者の場合 -->
-	<?php if (isset($bidinfo->id) && $authuser['id'] === $biditem->user_id) : ?>
-		<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[落札者へメッセージ送信]</a></h6>
-		<!-- 落札者の場合 -->
-	<?php elseif (isset($bidinfo->id) && $authuser['id'] === $bidinfo->user_id) : ?>
-		<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">[出品者へメッセージ送信]</a></h6>
-	<?php endif; ?>
+	<h6><a href="<?= $this->Url->build(['controller' => 'Messages', 'action' => 'add', $bidinfo->id]) ?>">
+			<?php if (isset($bidinfo->id) && $authuser['id'] === $biditem->user_id) : ?>
+				<?php echo '[落札者へメッセージ送信]' ?>
+				<!-- 落札者の場合 -->
+			<?php elseif (isset($bidinfo->id) && $authuser['id'] === $bidinfo->user_id) : ?>
+				<?php echo '[出品者へメッセージ送信]' ?>
+		</a></h6>
+<?php endif; ?>
+<!-- 発送連絡のボタン -->
+<?php if (isset($bidinfo->address) && $authuser['id'] === $biditem->user_id && is_null($bidinfo->is_sent)) : ?>
+	<?= $this->Form->create(
+		'Bidinfo',
+		[
+			'type' => 'post',
+			'url' => ['action' => 'sending']
+		]
+	) ?>
+	<?php
+	echo $this->Form->hidden('bidinfo_id', ['value' => $bidinfo->id]);
+	?>
+	<?= $this->Form->button(__('発送連絡をする')) ?>
+	<?= $this->Form->end() ?>
 	<!-- 発送連絡のボタン -->
-	<?php if (isset($bidinfo->address) && $authuser['id'] === $biditem->user_id && is_null($bidinfo->is_sent)) : ?>
-		<?= $this->Form->create(
-			'Bidinfo',
-			[
-				'type' => 'post',
-				'url' => ['action' => 'sending']
-			]
-		) ?>
-		<?php
-		echo $this->Form->hidden('bidinfo_id', ['value' => $bidinfo->id]);
-		?>
-		<?= $this->Form->button(__('発送連絡をする')) ?>
-		<?= $this->Form->end() ?>
-		<!-- 発送連絡のボタン -->
-	<?php endif; ?>
-	<!-- 発送連絡をしたかの表示 -->
-	<?php if (isset($bidinfo->is_sent) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditem->user_id)) : ?>
-		<div class="related">
-			<h4><?= __('商品は発送されました') ?></h4>
-		</div>
-	<?php endif; ?>
-	<!-- ここまで -->
+<?php endif; ?>
+<!-- 発送連絡をしたかの表示 -->
+<?php if (isset($bidinfo->is_sent) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditem->user_id)) : ?>
+	<div class="related">
+		<h4><?= __('商品は発送されました') ?></h4>
+	</div>
+<?php endif; ?>
+<!-- ここまで -->
+<!-- 受取連絡のボタン -->
+<?php if (isset($bidinfo->is_sent) && $authuser['id'] === $bidinfo->user_id && is_null($bidinfo->is_received)) : ?>
+	<?= $this->Form->create(
+		'Bidinfo',
+		[
+			'type' => 'post',
+			'url' => ['action' => 'receiving']
+		]
+	) ?>
+	<?php
+	echo $this->Form->hidden('bidinfo_id', ['value' => $bidinfo->id]);
+	?>
+	<?= $this->Form->button(__('受取連絡をする')) ?>
+	<?= $this->Form->end() ?>
 	<!-- 受取連絡のボタン -->
-	<?php if (isset($bidinfo->is_sent) && $authuser['id'] === $bidinfo->user_id && is_null($bidinfo->is_received)) : ?>
-		<?= $this->Form->create(
-			'Bidinfo',
-			[
-				'type' => 'post',
-				'url' => ['action' => 'receiving']
-			]
-		) ?>
-		<?php
-		echo $this->Form->hidden('bidinfo_id', ['value' => $bidinfo->id]);
-		?>
-		<?= $this->Form->button(__('受取連絡をする')) ?>
-		<?= $this->Form->end() ?>
-		<!-- 受取連絡のボタン -->
-	<?php endif; ?>
-	<?php if (isset($bidinfo->is_received) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditem->user_id) && ($ratings->user_id !== $authuser['id'])) : ?>
-		<h6><a href="<?= $this->Url->build(['controller' => 'Ratings', 'action' => 'add', $bidinfo->id]) ?>">[取引相手の評価をする]</a></h6>
-	<?php endif; ?>
+<?php endif; ?>
+<?php if (isset($bidinfo->is_received) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditem->user_id) && ($ratings->user_id !== $authuser['id'])) : ?>
+	<h6><a href="<?= $this->Url->build(['controller' => 'Ratings', 'action' => 'add', $bidinfo->id]) ?>">[取引相手の評価をする]</a></h6>
+<?php endif; ?>
 </div>
 <!-- カウントダウンタイマー -->
 <?php
