@@ -81,11 +81,14 @@ class MessagesController extends AuctionBaseController
         if ($this->request->is('post')) {
             $message = $this->Messages->patchEntity($message, $this->request->getData());
             if ($this->Messages->save($message)) {
-                $this->Flash->success(__('The message has been saved.'));
+                $this->Flash->success(__('メッセージを送信しました'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect([
+                    'controller' => 'Auction',
+                    'action' => 'index'
+                ]);
             }
-            $this->Flash->error(__('The message could not be saved. Please, try again.'));
+            $this->Flash->error(__('メッセージを送信できませんでした。もう一度送信してください。'));
         }
         $users = $this->Messages->Users->find('list', ['limit' => 200]);
         $this->set(compact('message', 'users', 'bidinfo'));
