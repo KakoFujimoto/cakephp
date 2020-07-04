@@ -109,7 +109,7 @@ class UsersController extends AuctionBaseController
 
         $rate = $this->Ratings->find('all', [
             'conditions' => ['rated_user_id' => $id],
-            'fields' => ['stars']
+            'fields' => ['stars', 'comments']
         ])->toArray();
         $this->set(compact('rate'));
     }

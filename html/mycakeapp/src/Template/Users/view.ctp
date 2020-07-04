@@ -10,18 +10,17 @@
                 <?php echo (round($stars_sum, 1)); ?></td>
         </tr>
     </table>
-    <div class="related">
-        <?php if (!empty($user->ratings)) : ?>
-            <table cellpadding="0" cellspacing="0">
+    <?php if (!empty($user->ratings)) : ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('評価コメント') ?></th>
+            </tr>
+            <?php $comments = array_column($rate, 'comments'); ?>
+            <?php foreach ($comments as $comment) : ?>
                 <tr>
-                    <th scope="col"><?= __('評価コメント') ?></th>
+                    <td><?= h($comment) ?></td>
                 </tr>
-                <?php foreach ($user->ratings as $ratings) : ?>
-                    <tr>
-                        <td><?= h($ratings->comments) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        <?php endif; ?>
-    </div>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
 </div>
