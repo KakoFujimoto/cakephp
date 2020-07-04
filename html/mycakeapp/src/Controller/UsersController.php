@@ -98,21 +98,20 @@ class UsersController extends AuctionBaseController
         $this->set('_serialize', ['users']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
+    // 編集箇所
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
             'contain' => ['Ratings']
         ]);
-
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
+
+        $rate = $this->Ratings->find('all', [
+            'conditions' => ['rated_user_id' => $id],
+            'fields' => ['stars']
+        ])->toArray();
+        $this->set(compact('rate'));
     }
 
     /**
