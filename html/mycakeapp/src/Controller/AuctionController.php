@@ -88,8 +88,6 @@ class AuctionController extends AuctionBaseController
 		$this->set(compact('biditem', 'bidrequests', 'bidinfo'));
 
 		// ratingsテーブルからbidinfo_idが落札商品であるレコードを取得し渡す
-		$bidinfo_id = $bidinfo->id;
-		$this->set(compact('bidinfo_id'));
 		$ratings = $this->Ratings->find()->where(['user_id' => $this->Auth->user('id')])
 			->where(['bidinfo_id' => $bidinfo->id])->first();
 		$this->set(compact('ratings'));
