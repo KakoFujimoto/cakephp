@@ -76,7 +76,7 @@ class AuctionBaseController extends AppController
 		if ($user['role'] === 'admin') {
 			return true;
 		}
-		// 一般ユーザーはAuction、Messages、RatingsControllerのみtrue、他はfalse
+		// 一般ユーザーはAuction、Messages、Ratings、UsersControllerのみtrue、他はfalse
 		if ($user['role'] === 'user') {
 			if (
 				$this->name == 'Auction' ||
