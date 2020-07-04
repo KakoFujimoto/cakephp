@@ -33,7 +33,14 @@
                 'empty' => '星の数を選んでください'
             ]
         );
-        echo $this->Form->control('comments');
+        echo $this->Form->control(
+            'comments',
+            [
+                'type' => 'textarea',
+                'cols' => 10,
+                'rows' => 5
+            ]
+        );
         echo $this->Form->hidden('bidinfo_id', ['value' => $bidinfo->id]);
         ?>
     </fieldset>
