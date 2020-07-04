@@ -66,7 +66,7 @@ class AuctionBaseController extends AppController
 	public function beforeFilter(Event $event)
 	{
 		parent::beforeFilter($event);
-		$this->Auth->allow(['view']);
+		$this->Auth->allow(['login', 'view', 'add']);
 	}
 
 	// 認証時のロールの処理
