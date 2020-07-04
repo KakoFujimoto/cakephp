@@ -35,8 +35,6 @@ class UsersController extends AuctionBaseController
 
         // ログインしているユーザー情報をauthuserに設定
         $this->set('authuser', $this->Auth->user());
-        // レイアウトをauctionに変更
-        $this->viewBuilder()->setLayout('auction');
     }
 
     // ログイン処理
@@ -92,6 +90,9 @@ class UsersController extends AuctionBaseController
      */
     public function index()
     {
+        // レイアウトをauctionに変更
+        $this->viewBuilder()->setLayout('auction');
+
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
@@ -101,6 +102,9 @@ class UsersController extends AuctionBaseController
     // 編集箇所
     public function view($id = null)
     {
+        // レイアウトをauctionに変更
+        $this->viewBuilder()->setLayout('auction');
+
         $user = $this->Users->get($id, [
             'contain' => ['Ratings']
         ]);
