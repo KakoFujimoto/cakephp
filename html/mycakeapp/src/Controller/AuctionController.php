@@ -184,6 +184,10 @@ class AuctionController extends AuctionBaseController
 			'contain' => ['Users', 'Bidinfo', 'Bidinfo.Users']
 		])->first();
 		$this->set(compact('biditems'));
+		// ratingsテーブルからbidinfo_idが落札商品であるレコードを取得し渡す
+		$ratings = $this->Ratings->find()->where(['user_id' => $this->Auth->user('id')])
+			->where(['bidinfo_id' => $bidinfo->id])->first();
+		$this->set(compact('ratings'));
 	}
 
 	// 落札情報の表示
