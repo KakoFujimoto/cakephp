@@ -5,9 +5,15 @@
             <th scope="row"><?= __('名前') ?></th>
             <td><?= h($user->username) ?></td>
             <th scope="row"><?= __('評価の平均値') ?></th>
-            <td> <?php $stars = array_column($rate, 'stars'); ?>
-                <?php $stars_sum = array_sum($stars) / count($stars); ?>
-                <?php echo (round($stars_sum, 1)); ?></td>
+            <td>
+                <?php if (!empty($user->ratings)) : ?>
+                    <?php $stars = array_column($rate, 'stars'); ?>
+                    <?php $stars_sum = array_sum($stars) / count($stars); ?>
+                    <?php echo (round($stars_sum, 1)); ?>
+                <?php else : ?>
+                    <?php echo '評価はまだありません'; ?>
+                <?php endif; ?>
+            </td>
         </tr>
     </table>
     <?php if (!empty($user->ratings)) : ?>
