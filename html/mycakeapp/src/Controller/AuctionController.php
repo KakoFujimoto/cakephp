@@ -78,19 +78,8 @@ class AuctionController extends AuctionBaseController
 			'contain' => ['Users'],
 			'order' => ['price' => 'desc']
 		])->toArray();
-		// biditem_idが$idの$bidinfoをview.ctpに渡す処理　//added
-		$bidinfo = $this->Bidinfo->find('all', [
-			'conditions' => ['biditem_id' => $id],
-			'contain' => ['Biditems', 'Users', 'Biditems.Users'],
-			'order' => ['Bidinfo.id' => 'desc']
-		])->first();
 		// オブジェクト類をテンプレート用に設定
-		$this->set(compact('biditem', 'bidrequests', 'bidinfo'));
-
-		// ratingsテーブルからbidinfo_idが落札商品であるレコードを取得し渡す
-		$ratings = $this->Ratings->find()->where(['user_id' => $this->Auth->user('id')])
-			->where(['bidinfo_id' => $bidinfo->id])->first();
-		$this->set(compact('ratings'));
+		$this->set(compact('biditem', 'bidrequests'));
 	}
 
 
@@ -190,7 +179,13 @@ class AuctionController extends AuctionBaseController
 			'order' => ['created' => 'desc']
 		]);
 		$this->set(compact('bidmsgs', 'bidinfo', 'bidmsg'));
+
+		$biditems = $this->Biditems->find('all', [
+			'contain' => ['Users', 'Bidinfo', 'Bidinfo.Users']
+		])->first();
+		$this->set(compact('biditems'));
 	}
+
 	// 落札情報の表示
 	public function home()
 	{
@@ -220,12 +215,11 @@ class AuctionController extends AuctionBaseController
 	public function address($id = null)
 	{
 		// biditem_idが$idの$bidinfoをview.ctpに渡す処理　//added
-		$bidinfo = $this->Bidinfo->find('all', [
-			'conditions' => ['biditem_id' => $id],
+		$bidinfo = $this->Bidinfo->get($id, [
 			'contain' => ['Biditems', 'Users', 'Biditems.Users'],
 			'order' => ['Bidinfo.id' => 'desc']
-		])->first();
-		$bidinfo->biditem_id = $id;
+		]);
+		// $bidinfo->biditem_id = $id;
 		// saveの処理
 		if ($this->request->is('post')) {
 			$data = $this->request->getData();
