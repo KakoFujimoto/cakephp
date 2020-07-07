@@ -57,8 +57,10 @@
 				<?= $this->Form->end() ?>
 				<!-- 受取連絡のボタン -->
 			<?php endif; ?>
-			<?php if (isset($bidinfo->is_received) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditems->user_id) && ($ratings->user_id !== $authuser['id'])) : ?>
-				<h6><a href="<?= $this->Url->build(['controller' => 'Ratings', 'action' => 'add', $bidinfo->id]) ?>">[取引相手の評価をする]</a></h6>
+			<?php if (is_null($ratings) ||  $ratings->user_id !== $authuser['id']) : ?>
+				<?php if (isset($bidinfo->is_received) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditems->user_id)) : ?>
+					<h6><a href="<?= $this->Url->build(['controller' => 'Ratings', 'action' => 'add', $bidinfo->id]) ?>">[取引相手の評価をする]</a></h6>
+				<?php endif; ?>
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
