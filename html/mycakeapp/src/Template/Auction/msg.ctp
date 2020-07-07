@@ -3,7 +3,7 @@
 	<?php if (isset($bidinfo) && $authuser['id'] === $bidinfo->user_id && is_null($bidinfo->address)) : ?>
 		<h6><a href="<?= $this->Url->build(['action' => 'address', $bidinfo->id]) ?>">[発送先入力]</a></h6>
 	<?php endif; ?>
-	<?php if (isset($bidinfo->address) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditems->user_id)) : ?>
+	<?php if (isset($bidinfo->address)) : ?>
 		<div class="related">
 			<h4><?= __('発送先情報') ?></h4>
 			<table cellpadding="0" cellspacing="0">
@@ -57,9 +57,7 @@
 				<?= $this->Form->end() ?>
 				<!-- 受取連絡のボタン -->
 			<?php endif; ?>
-			<!-- <?php var_dump($ratings); ?>
-			<?php var_dump($biditems); ?> -->
-			<?php if (is_null($ratings) || !isset($ratings->user_id) && isset($bidinfo->is_received) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditems->user_id) && ($ratings->user_id !== $authuser['id'])) : ?>
+			<?php if (isset($bidinfo->is_received) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditems->user_id) && ($ratings->user_id !== $authuser['id'])) : ?>
 				<h6><a href="<?= $this->Url->build(['controller' => 'Ratings', 'action' => 'add', $bidinfo->id]) ?>">[取引相手の評価をする]</a></h6>
 			<?php endif; ?>
 		</div>

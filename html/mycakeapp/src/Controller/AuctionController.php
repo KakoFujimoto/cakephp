@@ -180,13 +180,13 @@ class AuctionController extends AuctionBaseController
 		]);
 		$this->set(compact('bidmsgs', 'bidinfo', 'bidmsg'));
 
-		$biditems = $this->Biditems->find('all', [
-			'contain' => ['Users', 'Bidinfo', 'Bidinfo.Users']
-		])->first();
+		$biditems = $this->Biditems->find()->where(['user_id' => $this->Auth->user('id')])
+			->first();
 		$this->set(compact('biditems'));
+
 		// ratingsテーブルからbidinfo_idが落札商品であるレコードを取得し渡す
 		$ratings = $this->Ratings->find()->where(['user_id' => $this->Auth->user('id')])
-			->where(['bidinfo_id' => $bidinfo->id])->first();
+			->where(['bidinfo_id' => $bidinfo_id])->first();
 		$this->set(compact('ratings'));
 	}
 
