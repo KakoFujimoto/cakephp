@@ -211,7 +211,7 @@ return [
              */
             'host' => 'localhost',
             'port' => 25,
-            'timeout' => 30,
+            'timeout' => 1440,
             'username' => null,
             'password' => null,
             'client' => null,

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -53,6 +54,12 @@ class BidinfoTable extends Table
         $this->hasMany('Bidmessages', [
             'foreignKey' => 'bidinfo_id',
         ]);
+        $this->hasMany('Messages', [
+            'foreignKey' => 'bidinfo_id',
+        ]);
+        $this->hasMany('Ratings', [
+            'foreignKey' => 'bidinfo_id',
+        ]);
     }
 
     /**
@@ -71,6 +78,26 @@ class BidinfoTable extends Table
             ->integer('price')
             ->requirePresence('price', 'create')
             ->notEmptyString('price');
+
+        $validator
+            ->scalar('address')
+            ->maxLength('address', 255);
+
+        $validator
+            ->scalar('name')
+            ->maxLength('name', 100);
+
+        $validator
+            ->scalar('tel')
+            ->maxLength('tel', 11);
+
+        $validator
+            ->boolean('is_sent')
+            ->maxLength('is_sent', 1);
+
+        $validator
+            ->boolean('is_received')
+            ->maxLength('is_received', 1);
 
         return $validator;
     }

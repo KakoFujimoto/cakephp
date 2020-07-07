@@ -15,35 +15,26 @@ use Cake\Event\Event; // added.
  *
  * @method \App\Model\Entity\User[] paginate($object = null, array $settings = [])
  */
-class UsersController extends AppController
+class UsersController extends AuctionBaseController
 {
-
+    // デフォルトテーブルを使わない
+    public $useTable = false;
     public function initialize()
     {
         parent::initialize();
-        // 各種コンポーネントのロード
-        $this->loadComponent('RequestHandler');
-        $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'],
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'username',
-                        'password' => 'password'
-                    ]
-                ]
-            ],
-            'loginRedirect' => [
-                'controller' => 'Users',
-                'action' => 'login'
-            ],
-            'logoutRedirect' => [
-                'controller' => 'Users',
-                'action' => 'logout',
-            ],
-            'authError' => 'ログインしてください。',
-        ]);
+        $this->loadComponent('Paginator');
+        // 必要なモデルをすべてロード
+        $this->loadModel('Users');
+        $this->loadModel('Biditems');
+        $this->loadModel('Bidrequests');
+        $this->loadModel('Bidinfo');
+        $this->loadModel('Bidmessages');
+        $this->loadModel('Messages');
+        $this->loadModel('Ratings');
+
+
+        // ログインしているユーザー情報をauthuserに設定
+        $this->set('authuser', $this->Auth->user());
     }
 
     // ログイン処理
@@ -99,27 +90,32 @@ class UsersController extends AppController
      */
     public function index()
     {
+        // レイアウトをauctionに変更
+        $this->viewBuilder()->setLayout('auction');
+
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
+    // 編集箇所
     public function view($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => ['Bidinfo', 'Biditems', 'Bidmessages', 'Bidrequests']
-        ]);
+        // レイアウトをauctionに変更
+        $this->viewBuilder()->setLayout('auction');
 
+        $user = $this->Users->get($id, [
+            'contain' => ['Ratings']
+        ]);
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
+
+        $rate = $this->Ratings->find('all', [
+            'conditions' => ['rated_user_id' => $id],
+            'fields' => ['stars', 'comments']
+        ])->toArray();
+        $this->set(compact('rate'));
     }
 
     /**

@@ -20,6 +20,10 @@ class AuctionController extends AuctionBaseController
 		$this->loadModel('Bidrequests');
 		$this->loadModel('Bidinfo');
 		$this->loadModel('Bidmessages');
+		$this->loadModel('Messages');
+		$this->loadModel('Ratings');
+
+
 		// ログインしているユーザー情報をauthuserに設定
 		$this->set('authuser', $this->Auth->user());
 		// レイアウトをauctionに変更
@@ -77,6 +81,8 @@ class AuctionController extends AuctionBaseController
 		// オブジェクト類をテンプレート用に設定
 		$this->set(compact('biditem', 'bidrequests'));
 	}
+
+
 	// 出品する処理
 	public function add()
 	{
@@ -118,8 +124,6 @@ class AuctionController extends AuctionBaseController
 		// 値を保管
 		$this->set(compact('biditem'));
 	}
-
-
 
 	// 入札の処理
 	public function bid($biditem_id = null)
@@ -175,7 +179,17 @@ class AuctionController extends AuctionBaseController
 			'order' => ['created' => 'desc']
 		]);
 		$this->set(compact('bidmsgs', 'bidinfo', 'bidmsg'));
+
+		$biditems = $this->Biditems->find()->where(['user_id' => $this->Auth->user('id')])
+			->first();
+		$this->set(compact('biditems'));
+
+		// ratingsテーブルからbidinfo_idが落札商品であるレコードを取得し渡す
+		$ratings = $this->Ratings->find()->where(['user_id' => $this->Auth->user('id')])
+			->where(['bidinfo_id' => $bidinfo_id])->first();
+		$this->set(compact('ratings'));
 	}
+
 	// 落札情報の表示
 	public function home()
 	{
@@ -199,5 +213,62 @@ class AuctionController extends AuctionBaseController
 			'limit' => 10
 		])->toArray();
 		$this->set(compact('biditems'));
+	}
+
+	// 落札者の発送先入力
+	public function address($id = null)
+	{
+		// biditem_idが$idの$bidinfoをview.ctpに渡す処理　//added
+		$bidinfo = $this->Bidinfo->get($id, [
+			'contain' => ['Biditems', 'Users', 'Biditems.Users'],
+			'order' => ['Bidinfo.id' => 'desc']
+		]);
+		// $bidinfo->biditem_id = $id;
+		// saveの処理
+		if ($this->request->is('post')) {
+			$data = $this->request->getData();
+			$bidinfo = $this->Bidinfo->patchEntity($bidinfo, $data);
+			if ($this->Bidinfo->save($bidinfo)) {
+				$this->Flash->success(__('送信しました！'));
+				return $this->redirect(['action' => 'index']);
+			} else {
+				$this->Flash->error(__('送信に失敗しました。もう一度入力ください'));
+			}
+		}
+		$this->set(compact('bidinfo'));
+	}
+
+	// 出品者の発送連絡
+	public function sending()
+	{
+		// ボタンが押されればis_sentをtrueにして保存する
+		if ($this->request->is('post')) {
+			$data = $this->request->getData();
+			$bidinfo = $this->Bidinfo->get($data['bidinfo_id']);
+			$bidinfo->is_sent = true;
+			if ($this->Bidinfo->save($bidinfo)) {
+				$this->Flash->success(__('落札者へ発送連絡をしました！'));
+				return $this->redirect(['action' => 'index']);
+			} else {
+				$this->Flash->error(__('送信できませんでした。もう一度試してください'));
+			}
+		}
+	}
+
+	// 落札者の受取連絡
+	public function receiving()
+	{
+		// ボタンが押されればis_receivedをtrueにして保存する
+		if ($this->request->is('post')) {
+			$data = $this->request->getData();
+			$bidinfo = $this->Bidinfo->get($data['bidinfo_id']);
+			$bidinfo->is_received = true;
+			if ($this->Bidinfo->save($bidinfo)) {
+				$this->Flash->success(__('出品者へ受取連絡をしました！'));
+				return $this->redirect(['action' => 'index']);
+			} else {
+				$this->Flash->error(__('送信できませんでした。もう一度試してください'));
+			}
+		}
 	}
 }
