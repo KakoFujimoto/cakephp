@@ -57,7 +57,9 @@
 				<?= $this->Form->end() ?>
 				<!-- 受取連絡のボタン -->
 			<?php endif; ?>
-			<?php if (isset($bidinfo->is_received) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditems->user_id) && ($ratings->user_id !== $authuser['id'])) : ?>
+			<!-- <?php var_dump($ratings); ?>
+			<?php var_dump($biditems); ?> -->
+			<?php if (is_null($ratings) || !isset($ratings->user_id) && isset($bidinfo->is_received) && ($authuser['id'] === $bidinfo->user_id || $authuser['id'] === $biditems->user_id) && ($ratings->user_id !== $authuser['id'])) : ?>
 				<h6><a href="<?= $this->Url->build(['controller' => 'Ratings', 'action' => 'add', $bidinfo->id]) ?>">[取引相手の評価をする]</a></h6>
 			<?php endif; ?>
 		</div>
