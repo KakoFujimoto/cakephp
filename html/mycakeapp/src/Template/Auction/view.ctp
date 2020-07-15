@@ -56,8 +56,9 @@
 				<td><?= h($biditem->endtime) ?></td>
 			</tr>
 		</table>
+		<p id="added"><?= '売り切れです！！' ?></p>
 	<?php else : ?>
-		<p><?= '※落札情報は、ありません。' ?></p>
+		<p id="added"><?= '売れ残りです！！' ?></p>
 	<?php endif; ?>
 </div>
 <div class="related">

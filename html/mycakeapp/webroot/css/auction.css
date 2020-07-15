@@ -25,3 +25,7 @@ table tr th.small {
 nav.sidebar {
 	background:#f6f6ff;
 }
+#added{
+	font-size: 50px;
+	color: #f00;
+}
