@@ -5,8 +5,8 @@
 - 相手から入力されたレーティング（数字の平均値）と、評価コメントは各ユーザーのページから確認可能
 
 ## DB定義書&詳細設計書
--
--
+- [DB定義書](https://docs.google.com/spreadsheets/d/1i22HgUykUn5hdNGy3_c2qXfKA_kp-SsIJ4Qp65YfoFw/edit#gid=0)
+- [詳細設計書](https://docs.google.com/document/d/1t7oVXwr0tgAfDz58eBnsfhLHraRQAxvWdUCB1fIZ4Mc/edit)
 
 
 ## docker-mycakeapp2
