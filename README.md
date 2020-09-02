@@ -4,7 +4,7 @@
 
 ## ブランチ詳細
 
-- [fearture/cakephp-challenge1/...掲示板への２種の機能追加](https://github.com/KakoFujimoto/quelcode-cakephp/blob/fearture/cakephp-challenge1/README.md)
+- [fearture/cakephp-challenge1/...掲示板への２種の機能追加](https://github.com/KakoFujimoto/quelcode-cakephp/blob/feature/cakephp-challenge1/README.md)
 
 ## docker-mycakeapp2
 
