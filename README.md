@@ -1,4 +1,10 @@
-# docker-mycakeapp2
+# CakePHP3コーディング
+## 使用書籍
+[CakePHP超入門](https://www.amazon.co.jp/gp/product/B07CKHQ4KR/)
+
+
+
+## docker-mycakeapp2
 
 - CakePHP 超入門のオークションアプリの docker 環境
 
