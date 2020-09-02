@@ -4,7 +4,7 @@
 
 ## ブランチ詳細
 
-- [fearture/cakephp-challenge1/...オークションに２機能追加](https://github.com/KakoFujimoto/quelcode-cakephp/blob/feature/cakephp-challenge1/README.md)
+- [fearture/cakephp-challenge1/...オークションに画像アップローダーとカウントダウンタイマー追加](https://github.com/KakoFujimoto/quelcode-cakephp/blob/feature/cakephp-challenge1/README.md)
 
 - [cakephp-rating/...オークションに評価機能追加](https://github.com/KakoFujimoto/quelcode-cakephp/tree/cakephp-rating)
 
