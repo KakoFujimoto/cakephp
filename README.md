@@ -6,8 +6,8 @@
 
 ## DB定義書、詳細設計書
 
-- https://docs.google.com/spreadsheets/d/1ArKGZ3wbabl3wbAF-Z8NGqVU9kXZNmabJZ3CF93oCo4/edit#gid=0
-- 
+- [DB定義書](https://docs.google.com/spreadsheets/d/1ArKGZ3wbabl3wbAF-Z8NGqVU9kXZNmabJZ3CF93oCo4/edit#gid=0)
+- [詳細設計書](https://docs.google.com/document/d/1-bsMadw-6Y8pNpBtJJdzMvYpkCoNGJBjXNciJX5Kudc/edit#heading=h.2ku92wj4gass)
 
 ## docker-mycakeapp2
 
