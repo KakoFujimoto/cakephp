@@ -6,6 +6,14 @@
 
 - オークションアプリに評価機能追加（DB定義書/詳細設計書）
 
+## 実装箇所
+
+- 
+
+- 
+
+- 
+
 
 ## 参考書籍
 [CakePHP超入門](https://www.amazon.co.jp/gp/product/B07CKHQ4KR/)
