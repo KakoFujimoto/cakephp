@@ -1,17 +1,14 @@
 # CakePHP3コーディング
 
 ## アウトライン
-- 
-- 
+
+- オークションアプリに画像アップローダーとカウントダウンタイマー追加
+
+- オークションアプリに評価機能追加
+
 
 ## 参考書籍
 [CakePHP超入門](https://www.amazon.co.jp/gp/product/B07CKHQ4KR/)
-
-## ブランチ詳細
-
-- [fearture/cakephp-challenge1/...オークションアプリに画像アップローダーとカウントダウンタイマー追加](https://github.com/KakoFujimoto/quelcode-cakephp/blob/feature/cakephp-challenge1/README.md)
-
-- [cakephp-rating/...オークションアプリに評価機能追加](https://github.com/KakoFujimoto/quelcode-cakephp/tree/cakephp-rating)
 
 ## 開発環境
 ```
