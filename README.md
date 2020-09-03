@@ -6,7 +6,7 @@
 
 
 
-- ユーザー同士の評価機能追加（[DB定義書](https://docs.google.com/spreadsheets/d/1i22HgUykUn5hdNGy3_c2qXfKA_kp-SsIJ4Qp65YfoFw/edit#gid=0)[詳細設計書](https://docs.google.com/document/d/1t7oVXwr0tgAfDz58eBnsfhLHraRQAxvWdUCB1fIZ4Mc/edit)）
+- ユーザー同士の評価機能追加（[DB定義書](https://docs.google.com/spreadsheets/d/1i22HgUykUn5hdNGy3_c2qXfKA_kp-SsIJ4Qp65YfoFw/edit#gid=0)/[詳細設計書](https://docs.google.com/document/d/1t7oVXwr0tgAfDz58eBnsfhLHraRQAxvWdUCB1fIZ4Mc/edit)）
 
 ## 実装箇所
 
