@@ -1,9 +1,8 @@
 # CakePHP3コーディング
 
-## 開発環境
-```
-CakePHP3.8/Docker/MacOSX
-```
+## アウトライン
+- 
+- 
 
 ## 参考書籍
 [CakePHP超入門](https://www.amazon.co.jp/gp/product/B07CKHQ4KR/)
@@ -14,9 +13,10 @@ CakePHP3.8/Docker/MacOSX
 
 - [cakephp-rating/...オークションアプリに評価機能追加](https://github.com/KakoFujimoto/quelcode-cakephp/tree/cakephp-rating)
 
-## docker-mycakeapp2
-
-- CakePHP 超入門のオークションアプリの docker 環境
+## 開発環境
+```
+CakePHP3.8/Docker/MacOSX
+```
 
 ## docker 起動前の準備
 
