@@ -8,7 +8,7 @@
 
 - ユーザー同士の評価機能追加（[DB定義書](https://docs.google.com/spreadsheets/d/1i22HgUykUn5hdNGy3_c2qXfKA_kp-SsIJ4Qp65YfoFw/edit#gid=0)/[詳細設計書](https://docs.google.com/document/d/1t7oVXwr0tgAfDz58eBnsfhLHraRQAxvWdUCB1fIZ4Mc/edit)）
 
-## 実装箇所
+## 実装箇所詳細
 
 - 商品の詳細情報の欄を作成...入力時のバリデーションや出力時のエスケープ処理を実装
 - オークションの出品画像アップローダーを追加...画像であるかのチェック、同時刻にアップロードがあっても別名で保存
